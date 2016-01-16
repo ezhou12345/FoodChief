@@ -1,28 +1,25 @@
 package com.eyzhou.zest;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import java.util.List;
 
 /**
- * Created by eyzhou on 1/6/16.
+ * Created by eyzhou on 1/15/16.
  */
-public class ListAdapter extends BaseAdapter{
+public class GridAdapter extends BaseAdapter{
     Context context;
     List<RowItem> rowItem;
 //    private static LayoutInflater inflater=null;
 
-    ListAdapter(Context context, List<RowItem> rowItem) {
+    GridAdapter(Context context, List<RowItem> rowItem) {
         this.context = context;
         this.rowItem = rowItem;
     }
@@ -58,7 +55,7 @@ public class ListAdapter extends BaseAdapter{
         if (convertView == null) {
             LayoutInflater mInflater = (LayoutInflater) context
                     .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-            convertView = mInflater.inflate(R.layout.recipe_list, null);
+            convertView = mInflater.inflate(R.layout.recipe_list_small, null);
         }
 
         ImageView imgIcon = (ImageView) convertView.findViewById(R.id.Itemimage);
