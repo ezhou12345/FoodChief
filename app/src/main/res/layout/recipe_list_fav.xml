@@ -4,18 +4,18 @@
     android:layout_height="fill_parent"
     >
     <ImageView
-        android:id="@+id/Itemimage_small"
+        android:id="@+id/Itemimage_fav"
         android:layout_width="fill_parent"
         android:layout_height="100dp"
         android:scaleType="centerCrop"/>
     <TextView
-        android:id="@+id/Itemname_small"
+        android:id="@+id/Itemname_fav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/Itemimage_small"
-        android:layout_alignTop="@id/Itemimage_small"
-        android:layout_alignRight="@id/Itemimage_small"
-        android:layout_alignBottom="@id/Itemimage_small"
+        android:layout_alignLeft="@id/Itemimage_fav"
+        android:layout_alignTop="@id/Itemimage_fav"
+        android:layout_alignRight="@id/Itemimage_fav"
+        android:layout_alignBottom="@id/Itemimage_fav"
         style="@style/OverlayText"
         android:layout_margin="1dp"
         android:gravity="bottom"
@@ -23,34 +23,34 @@
         android:textColor="#FFF" />
 
     <LinearLayout
-        android:id="@+id/rating_time_small"
+        android:id="@+id/rating_time_fav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/Itemimage_small"
-        android:layout_alignTop="@id/Itemimage_small"
-        android:layout_alignRight="@id/Itemimage_small"
-        android:layout_alignBottom="@id/Itemimage_small"
+        android:layout_alignLeft="@id/Itemimage_fav"
+        android:layout_alignTop="@id/Itemimage_fav"
+        android:layout_alignRight="@id/Itemimage_fav"
+        android:layout_alignBottom="@id/Itemimage_fav"
         android:gravity="bottom"
         android:layout_margin="1dp"
         android:layout_centerHorizontal="true"
         android:orientation="vertical"
-        android:layout_below="@id/Itemname_small">
+        android:layout_below="@id/Itemname_fav">
         <ImageView
-            android:id="@+id/Itemdollars_small"
+            android:id="@+id/Itemdollars_fav"
             android:layout_width="80dp"
             android:layout_height="15dp"
             android:layout_marginRight="5dp"
             android:layout_gravity="center_vertical"/>
 
         <ImageView
-            android:id="@+id/Itemrating_small"
+            android:id="@+id/Itemrating_fav"
             android:layout_width="80dp"
             android:layout_height="15dp"
             android:layout_marginRight="5dp"
             android:layout_gravity="center_vertical"/>
 
         <TextView
-            android:id="@+id/Itemtime_small"
+            android:id="@+id/Itemtime_fav"
             android:layout_width="fill_parent"
             android:layout_height="40dp"
             android:layout_gravity="center_vertical"

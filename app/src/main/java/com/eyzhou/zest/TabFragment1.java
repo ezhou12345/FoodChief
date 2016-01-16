@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -293,12 +294,23 @@ public class TabFragment1 extends android.support.v4.app.ListFragment implements
         TextView nutrit = (TextView) dialog.findViewById(R.id.nutrition);
         nutrit.setText(nutrition[position]);
 
-        Button dialogButton = (Button) dialog.findViewById(R.id.add_button);
-        // if button is clicked, close the custom dialog
-        dialogButton.setOnClickListener(new View.OnClickListener() {
+        Button addButton = (Button) dialog.findViewById(R.id.add_button);
+        addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 TabFragment3.recipe_indices.add(current_index);
+                Toast.makeText(getActivity(), "Recipe added to menu!", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        Button favButton = (Button) dialog.findViewById(R.id.fav_button);
+        favButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TabFragment2.fav_indices.add(current_index);
+                Toast.makeText(getActivity(), "Recipe added to favorites!", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), Integer.toString(TabFragment2.fav_indices.size()), Toast.LENGTH_SHORT).show();
             }
         });
 

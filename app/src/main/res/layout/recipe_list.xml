@@ -6,7 +6,7 @@
     <ImageView
         android:id="@+id/Itemimage"
         android:layout_width="fill_parent"
-        android:layout_height="200dp"
+        android:layout_height="400dp"
         android:scaleType="centerCrop"/>
         <!--android:layout_marginBottom="5dp"-->
         <!--android:layout_marginLeft="5dp"-->
@@ -28,10 +28,48 @@
         android:layout_alignTop="@id/Itemimage"
         android:layout_alignRight="@id/Itemimage"
         android:layout_alignBottom="@id/Itemimage"
+        style="@style/OverlayText"
         android:layout_margin="1dp"
         android:gravity="bottom"
-        android:textSize="20sp"
-        android:textColor="#FFFFFF" />
+        android:textSize="30sp"
+        android:textColor="#FFF" />
+
+    <LinearLayout
+        android:id="@+id/rating_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/Itemimage"
+        android:layout_alignTop="@id/Itemimage"
+        android:layout_alignRight="@id/Itemimage"
+        android:layout_alignBottom="@id/Itemimage"
+        android:gravity="bottom"
+        android:layout_margin="1dp"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:layout_below="@id/Itemname">
+        <ImageView
+            android:id="@+id/Itemdollars"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="center_vertical"/>
+
+        <ImageView
+            android:id="@+id/Itemrating"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:id="@+id/Itemtime"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:textColor="#FFF"/>
+    </LinearLayout>
+
 
 
 

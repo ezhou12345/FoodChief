@@ -14,12 +14,12 @@ import java.util.List;
 /**
  * Created by eyzhou on 1/15/16.
  */
-public class GridAdapter extends BaseAdapter{
+public class ListAdapterSmall extends BaseAdapter{
     Context context;
     List<RowItem> rowItem;
 //    private static LayoutInflater inflater=null;
 
-    GridAdapter(Context context, List<RowItem> rowItem) {
+    ListAdapterSmall(Context context, List<RowItem> rowItem) {
         this.context = context;
         this.rowItem = rowItem;
     }
@@ -58,10 +58,10 @@ public class GridAdapter extends BaseAdapter{
             convertView = mInflater.inflate(R.layout.recipe_list_small, null);
         }
 
-        ImageView imgIcon = (ImageView) convertView.findViewById(R.id.Itemimage);
-        TextView txtTitle = (TextView) convertView.findViewById(R.id.Itemname);
-        ImageView rating = (ImageView) convertView.findViewById(R.id.Itemrating);
-        TextView totalTime = (TextView) convertView.findViewById(R.id.Itemtime);
+        ImageView imgIcon = (ImageView) convertView.findViewById(R.id.Itemimage_small);
+        TextView txtTitle = (TextView) convertView.findViewById(R.id.Itemname_small);
+        ImageView rating = (ImageView) convertView.findViewById(R.id.Itemrating_small);
+        TextView totalTime = (TextView) convertView.findViewById(R.id.Itemtime_small);
 
         RowItem row_pos = rowItem.get(position);
         // setting the image resource and title
@@ -83,7 +83,7 @@ public class GridAdapter extends BaseAdapter{
             // unrated?
         }
 
-        ImageView dollars = (ImageView) convertView.findViewById(R.id.Itemdollars);
+        ImageView dollars = (ImageView) convertView.findViewById(R.id.Itemdollars_small);
         int num_dollars = row_pos.getDollars();
         if (num_dollars == 1) {
             dollars.setImageResource(R.drawable.one_dollar);

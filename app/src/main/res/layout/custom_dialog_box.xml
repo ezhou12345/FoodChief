@@ -1,6 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="fill_parent"
+        android:layout_height="300dp"
+        android:scaleType="centerCrop"
+        android:layout_marginRight="5dp" />
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#FFF"
+        android:layout_toRightOf="@+id/image"/>
+
+    <LinearLayout
+        android:id="@+id/rate_add_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:layout_below="@id/image">
+        <ImageView
+            android:id="@+id/dollars"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="center_vertical"/>
+        <ImageView
+            android:id="@+id/rating"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:id="@+id/total_time"
+            android:layout_marginLeft="13dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textColor="#000"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/ingredients_summary"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:width="0dip"
+        android:textColor="#000"
+        android:layout_below="@id/rate_add_line"/>
+
+    <!--<Button-->
+        <!--android:id="@+id/dialogButtonOK"-->
+        <!--android:layout_width="300px"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Close"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--android:layout_marginRight="5dp"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_below="@+id/rate_add_line"-->
+        <!--/>-->
+
+    <Button
+        android:id="@+id/add_button"
+        android:layout_width="500px"
+        android:layout_height="wrap_content"
+        android:text="ADD TO MENU"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/ingredients_summary"
+        />
+
+    <Button
+        android:id="@+id/fav_button"
+        android:layout_width="500px"
+        android:layout_height="wrap_content"
+        android:text="FAVORITE!"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/add_button"
+        />
+
+    <TextView
+        android:id="@+id/ingredients_title"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:width="0dip"
+        android:text="INGREDIENTS:"
+        android:textColor="#000"
+        android:layout_below="@id/fav_button"/>
+
+    <TextView
+        android:id="@+id/ingredients"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:width="0dip"
+        android:textColor="#000"
+        android:layout_below="@id/ingredients_title"/>
+
+    <TextView
+        android:id="@+id/instructions_title"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:width="0dip"
+        android:text="INSTRUCTIONS:"
+        android:textColor="#000"
+        android:layout_below="@id/ingredients"/>
+
+    <TextView
+        android:id="@+id/instructions"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:width="0dip"
+        android:textColor="#000"
+        android:layout_below="@id/instructions_title"/>
+
+    <TextView
+        android:id="@+id/nutrition_title"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:width="0dip"
+        android:text="NUTRITION FACTS:"
+        android:textColor="#000"
+        android:layout_below="@id/instructions"/>
+
+    <TextView
+        android:id="@+id/nutrition"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:width="0dip"
+        android:textColor="#000"
+        android:layout_below="@id/nutrition_title"/>
+
+</RelativeLayout>
+</ScrollView>
