@@ -58,10 +58,10 @@ public class ListAdapterFav extends BaseAdapter{
             convertView = mInflater.inflate(R.layout.recipe_list_fav, null);
         }
 
-        ImageView imgIcon = (ImageView) convertView.findViewById(R.id.Itemimage_small);
-        TextView txtTitle = (TextView) convertView.findViewById(R.id.Itemname_small);
-        ImageView rating = (ImageView) convertView.findViewById(R.id.Itemrating_small);
-        TextView totalTime = (TextView) convertView.findViewById(R.id.Itemtime_small);
+        ImageView imgIcon = (ImageView) convertView.findViewById(R.id.Itemimage_fav);
+        TextView txtTitle = (TextView) convertView.findViewById(R.id.Itemname_fav);
+        ImageView rating = (ImageView) convertView.findViewById(R.id.Itemrating_fav);
+        TextView totalTime = (TextView) convertView.findViewById(R.id.Itemtime_fav);
 
         RowItem row_pos = rowItem.get(position);
         // setting the image resource and title
@@ -83,7 +83,7 @@ public class ListAdapterFav extends BaseAdapter{
             // unrated?
         }
 
-        ImageView dollars = (ImageView) convertView.findViewById(R.id.Itemdollars_small);
+        ImageView dollars = (ImageView) convertView.findViewById(R.id.Itemdollars_fav);
         int num_dollars = row_pos.getDollars();
         if (num_dollars == 1) {
             dollars.setImageResource(R.drawable.one_dollar);

@@ -6,8 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -98,6 +101,23 @@ public class ListAdapterSmall extends BaseAdapter{
         }
 
         totalTime.setText(row_pos.getTime());
+
+//        TextView ind = (TextView) convertView.findViewById(R.id.recipe_index_small);
+//        ind.setText(Integer.toString(position));
+
+        Button deleteButton = (Button) convertView.findViewById(R.id.MenuDeleteButton);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Toast.makeText(context, "-", Toast.LENGTH_SHORT).show();
+                View parentRow = (View) v.getParent();
+                ListView listView = (ListView) parentRow.getParent();
+                final int position = listView.getPositionForView(parentRow);
+                TabFragment3.recipe_indices.remove(position);
+                TabFragment3.adapter.notifyDataSetChanged();
+
+
+            }
+        });
 
         return convertView;
 

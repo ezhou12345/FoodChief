@@ -22,7 +22,8 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("Recipes"));
         tabLayout.addTab(tabLayout.newTab().setText("Favorites"));
         tabLayout.addTab(tabLayout.newTab().setText("Menu"));
-        tabLayout.addTab(tabLayout.newTab().setText("Cart"));
+        tabLayout.addTab(tabLayout.newTab().setText("Plan"));
+        tabLayout.addTab(tabLayout.newTab().setText("Grocery"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);

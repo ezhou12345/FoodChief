@@ -3,11 +3,21 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     >
+    <Button
+        android:id="@+id/MenuDeleteButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="right"
+        android:text="-"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:textSize="20sp"/>
     <ImageView
         android:id="@+id/Itemimage_small"
         android:layout_width="fill_parent"
         android:layout_height="100dp"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+        android:layout_below="@id/MenuDeleteButton"/>
     <TextView
         android:id="@+id/Itemname_small"
         android:layout_width="wrap_content"
@@ -21,6 +31,7 @@
         android:gravity="bottom"
         android:textSize="25sp"
         android:textColor="#FFF" />
+
 
     <LinearLayout
         android:id="@+id/rating_time_small"
@@ -56,6 +67,11 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
             android:textColor="#FFF"/>
+
+
+
     </LinearLayout>
+
+
 
 </RelativeLayout>
