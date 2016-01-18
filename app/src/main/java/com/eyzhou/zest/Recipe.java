@@ -53,7 +53,7 @@ public class Recipe {
     public String getSourceName() { return getString("sourceName"); }
     public RecipeIngredient[] getExtendedIngredients() {
         try {
-            JSONArray arr = obj.getJSONArray("imageUrls");
+            JSONArray arr = obj.getJSONArray("extendedIngredients");
             RecipeIngredient[] result = new RecipeIngredient[arr.length()];
             for (int i = 0, l = arr.length(); i < l; ++i) {
                 result[i] = new RecipeIngredient(arr.getJSONObject(i));

@@ -1,16 +1,18 @@
 package com.eyzhou.zest;
 
+import android.os.AsyncTask;
 import android.util.Log;
 
-import org.json.*;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 
-public class FoodAPI {
+import org.json.JSONArray;
+
+class Util {
     public static final String MASHAPE_KEY = "N4QXJBcElTmshOHzDoewnyT6hoLfp1JeWX2jsnEuo2v0RVRjV6";
     public static final String BASE_URL = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com";
-    private static String join(String[] arr, String delimiter) {
+    public static String join(String[] arr, String delimiter) {
         StringBuilder builder = new StringBuilder();
         for (int i = 0, l = arr.length; i < l; ++i) {
             if (i > 0)
@@ -19,24 +21,60 @@ public class FoodAPI {
         }
         return builder.toString();
     }
+}
 
-    public static RecipePreview[] searchRecipePreviewsByIngredientList(String[] ingredients, int resultCount) {
+class recipePreviewSearch extends AsyncTask<String, Void, RecipePreview[]> {
+    protected RecipePreview[] doInBackground(String[] ingredients) {
         try {
-            StringBuilder builder = new StringBuilder(BASE_URL);
-            builder.append("/recipes/findByIngredients?").append(join(ingredients,"%2C"))
-                    .append("&number=").append(Integer.toString(resultCount));
+            StringBuilder builder = new StringBuilder(Util.BASE_URL);
+            builder.append("/recipes/findByIngredients?")
+                    .append("ingredients=").append(Util.join(ingredients, "%2C"))
+                    .append("&limitLicense=false")
+                    .append("&number=1")
+                    .append("&ranking=1");
             Log.d("TEST", builder.toString());
+            HttpResponse<JsonNode> response = Unirest.get(builder.toString())
+                    .header("X-Mashape-Key", Util.MASHAPE_KEY)
+                    .header("Accept", "application/json")
+                    .asJson();
+            JSONArray arr = response.getBody().getArray();
+            RecipePreview[] previews = new RecipePreview[arr.length()];
+            for (int i = 0; i < arr.length(); ++i) {
+                previews[i] = new RecipePreview(arr.getJSONObject(i));
+            }
+            return previews;
+        } catch (Exception e) {
+            Log.d("TEST", e.toString());
             return null;
-//            HttpResponse<JsonNode> response = Unirest.get(builder.toString())
-//                    .header("X-Mashape-Key", MASHAPE_KEY)
-//                    .header("Accept", "application/json")
-//                    .asJson();
-//            JSONArray arr = response.getBody().getArray();
-//            RecipePreview[] previews = new RecipePreview[arr.length()];
-//            for (int i = 0; i < arr.length(); ++i) {
-//                previews[i] = new RecipePreview(arr.getJSONObject(i));
-//            }
-//            return previews;
+        }
+    }
+}
+
+class recipeSearch extends AsyncTask<Integer, Void, Recipe> {
+    protected Recipe doInBackground(Integer... id) {
+        try {
+            StringBuilder builder = new StringBuilder(Util.BASE_URL);
+            builder.append("/recipes/")
+                    .append(Integer.toString(id[0]))
+                    .append("/information");
+            Log.d("TEST", builder.toString());
+            HttpResponse<JsonNode> response = Unirest.get(builder.toString())
+                    .header("X-Mashape-Key", Util.MASHAPE_KEY)
+                    .asJson();
+            return new Recipe(response.getBody().getObject());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+}
+
+public class FoodAPI {
+
+    public static RecipePreview[] searchRecipePreviewsByIngredientList(String[] ingredients) {
+        try {
+            AsyncTask<String, Void, RecipePreview[]> r = new recipePreviewSearch().execute(ingredients);
+            return r.get();
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -45,14 +83,8 @@ public class FoodAPI {
 
     public static Recipe getRecipeById(int id) {
         try {
-            StringBuilder builder = new StringBuilder(BASE_URL);
-            builder.append("/recipes/")
-                    .append(Integer.toString(id))
-                    .append("/information");
-            HttpResponse<JsonNode> response = Unirest.get(builder.toString())
-                    .header("X-Mashape-Key", MASHAPE_KEY)
-                    .asJson();
-            return new Recipe(response.getBody().getObject());
+            AsyncTask<Integer, Void, Recipe> r = new recipeSearch().execute(id);
+            return r.get();
         } catch (Exception e) {
             e.printStackTrace();
             return null;
