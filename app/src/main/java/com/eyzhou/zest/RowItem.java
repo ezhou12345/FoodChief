@@ -5,27 +5,27 @@ package com.eyzhou.zest;
  */
 public class RowItem {
     private String title;
-    private int icon;
+    private String icon;
     private int time;
     private int stars;
     private String summary;
 
-    private int prep_time;
-    private int cook_time;
+//    private int prep_time;
+//    private int cook_time;
     private int dollar_signs;
     private String ingredients;
     private String instructions;
     private String nutrition;
 
-    public RowItem(String title, int icon, int time, int stars, String summary, int prep_time, int cook_time, int dollar_signs,
+    public RowItem(String title, String icon, int time, int stars, String summary, int dollar_signs,
                    String ingredients, String instructions, String nutrition) {
         this.title = title;
         this.icon = icon;
         this.time = time;
         this.stars = stars;
         this.summary = summary;
-        this.prep_time = prep_time;
-        this.cook_time = cook_time;
+//        this.prep_time = prep_time;
+//        this.cook_time = cook_time;
         this.dollar_signs = dollar_signs;
         this.ingredients = ingredients;
         this.instructions = instructions;
@@ -40,11 +40,11 @@ public class RowItem {
         this.title = title;
     }
 
-    public int getIcon() {
+    public String getIcon() {
         return icon;
     }
 
-    public void setIcon(int icon) {
+    public void setIcon(String icon) {
         this.icon = icon;
     }
 
@@ -60,13 +60,13 @@ public class RowItem {
         return summary;
     }
 
-    public int getPrep() {
-        return prep_time;
-    }
-
-    public int getCook() {
-        return cook_time;
-    }
+//    public int getPrep() {
+//        return prep_time;
+//    }
+//
+//    public int getCook() {
+//        return cook_time;
+//    }
 
     public int getDollars() {
         return dollar_signs;

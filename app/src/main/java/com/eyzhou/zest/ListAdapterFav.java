@@ -2,6 +2,10 @@ package com.eyzhou.zest;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +13,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -49,6 +54,31 @@ public class ListAdapterFav extends BaseAdapter{
         return rowItem.indexOf(getItem(position));
     }
 
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -65,7 +95,7 @@ public class ListAdapterFav extends BaseAdapter{
 
         RowItem row_pos = rowItem.get(position);
         // setting the image resource and title
-        imgIcon.setImageResource(row_pos.getIcon());
+        new DownloadImageTask(imgIcon).execute(row_pos.getIcon());
         txtTitle.setText(row_pos.getTitle());
 
         int num_stars = row_pos.getStars();
@@ -87,14 +117,8 @@ public class ListAdapterFav extends BaseAdapter{
         int num_dollars = row_pos.getDollars();
         if (num_dollars == 1) {
             dollars.setImageResource(R.drawable.one_dollar);
-        } else if (num_dollars == 2) {
-            dollars.setImageResource(R.drawable.two_dollars);
-        } else if (num_dollars == 3) {
-            dollars.setImageResource(R.drawable.three_dollars);
-        } else if (num_dollars == 4) {
-            dollars.setImageResource(R.drawable.four_dollars);
         } else {
-            // unrated?
+            dollars.setImageResource(R.drawable.two_dollars);
         }
 
         totalTime.setText(row_pos.getTime());

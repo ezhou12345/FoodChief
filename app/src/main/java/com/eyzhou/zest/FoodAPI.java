@@ -1,5 +1,7 @@
 package com.eyzhou.zest;
 
+import android.util.Log;
+
 import org.json.*;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
@@ -23,16 +25,18 @@ public class FoodAPI {
             StringBuilder builder = new StringBuilder(BASE_URL);
             builder.append("/recipes/findByIngredients?").append(join(ingredients,"%2C"))
                     .append("&number=").append(Integer.toString(resultCount));
-            HttpResponse<JsonNode> response = Unirest.get(builder.toString())
-                    .header("X-Mashape-Key", MASHAPE_KEY)
-                    .header("Accept", "application/json")
-                    .asJson();
-            JSONArray arr = response.getBody().getArray();
-            RecipePreview[] previews = new RecipePreview[arr.length()];
-            for (int i = 0; i < arr.length(); ++i) {
-                previews[i] = new RecipePreview(arr.getJSONObject(i));
-            }
-            return previews;
+            Log.d("TEST", builder.toString());
+            return null;
+//            HttpResponse<JsonNode> response = Unirest.get(builder.toString())
+//                    .header("X-Mashape-Key", MASHAPE_KEY)
+//                    .header("Accept", "application/json")
+//                    .asJson();
+//            JSONArray arr = response.getBody().getArray();
+//            RecipePreview[] previews = new RecipePreview[arr.length()];
+//            for (int i = 0; i < arr.length(); ++i) {
+//                previews[i] = new RecipePreview(arr.getJSONObject(i));
+//            }
+//            return previews;
         } catch (Exception e) {
             e.printStackTrace();
             return null;

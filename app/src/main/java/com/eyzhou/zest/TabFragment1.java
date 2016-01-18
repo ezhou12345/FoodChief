@@ -1,17 +1,28 @@
 package com.eyzhou.zest;
 
 import android.app.Dialog;
+import android.app.SearchManager;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -19,7 +30,7 @@ import java.util.List;
  */
 public class TabFragment1 extends android.support.v4.app.ListFragment implements AdapterView.OnItemClickListener {
 
-    public static String[] recipe_names ={
+    public static ArrayList<String> recipe_names = new ArrayList(Arrays.asList(
             "Easy Pasta Primavera",
             "Basic Chili",
             "Corn & Black Bean Pizza",
@@ -27,31 +38,39 @@ public class TabFragment1 extends android.support.v4.app.ListFragment implements
             "Kale Salad with Apples and Cheddar",
             "Fajita-Style Quesadillas",
             "Chicken & Sun-Dried Tomato Orzo"
-    };
-    public static int[] recipe_images = {
-            R.drawable.easy_pasta_premavera,
-            R.drawable.basic_chili,
-            R.drawable.corn_black_bean_pizza,
-            R.drawable.black_eyed_peas_with_pork_and_greens,
-            R.drawable.kale_salad_apples_cheddar,
-            R.drawable.fajita_style_quesadillas,
-            R.drawable.chicken_sun_dried_tomato_orzo
-    };
-    public static int[] recipe_time = {20,35,10,45,5,30,30};
-    public static int[] recipe_stars = {4,4,5,5,4,5,5};
-    public static String[] recipe_summaries ={"Wagon wheel pasta, mixed frozen vegetables, cream cheese spread with chive and onion, milk, salt, ground black pepper, parmesan cheese",
+    ));
+    public static ArrayList<String> recipe_images = new ArrayList(Arrays.asList(
+//            R.drawable.easy_pasta_premavera,
+//            R.drawable.basic_chili,
+//            R.drawable.corn_black_bean_pizza,
+//            R.drawable.black_eyed_peas_with_pork_and_greens,
+//            R.drawable.kale_salad_apples_cheddar,
+//            R.drawable.fajita_style_quesadillas,
+//            R.drawable.chicken_sun_dried_tomato_orzo
+            "http://www.mastercook.com/app/Image/1695005/840599.jpg",
+            "http://www.budgetbytes.com/wp-content/uploads/2013/12/Basic-Chili-front.jpg",
+            "http://www.healthforthewholeself.com/wp-content/uploads/2010/08/IMG_8518.jpg",
+            "http://bed56888308e93972c04-0dfc23b7b97881dee012a129d9518bae.r34.cf1.rackcdn.com/sites/default/files/imagecache/standard/recipes/MK6757.JPG",
+            "http://graphics8.nytimes.com/images/2010/12/28/science/31recipehealthnew/31recipehealthnew-articleLarge-v2.jpg",
+            "https://vessysday.files.wordpress.com/2012/09/quesadillas-1-of-1-22.jpg",
+            "http://assets.eatingwell.com/sites/default/files/imagecache/standard/recipes/MP6419.JPG"
+
+    ));
+    public static ArrayList<Integer> recipe_time = new ArrayList(Arrays.asList(20,35,10,45,5,30,30));
+    public static ArrayList<Integer> recipe_stars = new ArrayList(Arrays.asList(4,4,5,5,4,5,5));
+    public static ArrayList<String> recipe_summaries =new ArrayList(Arrays.asList(
+            "Wagon wheel pasta, mixed frozen vegetables, cream cheese spread with chive and onion, milk, salt, ground black pepper, parmesan cheese",
             "Olive oil, yellow onion, garlic, ground beef, kidney beans, black beans, tomatoes, tomato paste, chili powder, ground cumin, cayenne powder, garlic powder, onion powder, brown sugar, salt, ground pepper",
             "Plum tomato, black beans, frozen corn, pizza crust, barbecue sauce, shredded Mexican-blend cheese/mozzarella",
             "Boneless pork chops, onion, tomato paste, instant brown rice, kale leaves, garlic, chicken broth, vinegar, black-eyed peas, various seasoning",
             "Kale, toasted almonds, apple, sharp cheddar cheese, lemon juice, garlic, parmesan",
             "Red pepper, onion, serrano pepper, white corn tortillas, Monterery Jack cheese, tomato, cilantro, chicken breast, cooked beans, sour cream, lime",
             "Orzo, sun-dried tomatoes, tomato, garlic, fresh marjoram, red-wine vinegar, chicken breast, artichoke hearts, Romano cheese, seasoning"
-    };
+    ));
 
-    public static int[] recipe_prep = {0,5,0,30,5,20,0};
-    public static int[] recipe_cook = {0,30,0,15,0,10,0};
-    public static int[] recipe_dollars = {1,4,2,3,3,2,2};
-    public static String[] ingredients = {"Wagon wheel pasta\n" +
+    public static ArrayList<Integer> recipe_dollars = new ArrayList(Arrays.asList(1,4,2,3,3,2,2));
+    public static ArrayList<String> ingredients = new ArrayList(Arrays.asList(
+            "Wagon wheel pasta\n" +
             "8 oz package frozen mixed vegetables \n" +
             "16 oz cream cheese spread with chive and onion \n" +
             "1/2 of 8 oz tub milk \n" +
@@ -128,8 +147,9 @@ public class TabFragment1 extends android.support.v4.app.ListFragment implements
                     "1/4 tsp freshly ground pepper\n" +
                     "1 9-oz package forzen artichoke hearts, thawed\n" +
                     "1/2 cup finely shredded Romano cheese\n"
-    };
-    public static String[] instructions = {"1) In a Dutch oven (large cooking pot), cook pasta in a large amount of boiling, lightly salted water for 4 minutes. Add frozen vegetables. Cook about 5 minutes more or until pasta and vegetables are tender; drain. Return pasta mixture to hot pan.\n" +
+    ));
+    public static ArrayList<String> instructions = new ArrayList(Arrays.asList(
+            "1) In a Dutch oven (large cooking pot), cook pasta in a large amount of boiling, lightly salted water for 4 minutes. Add frozen vegetables. Cook about 5 minutes more or until pasta and vegetables are tender; drain. Return pasta mixture to hot pan.\n" +
             "2) Add cream cheese spread to pasta mixture. Cook until heated through, stirring occasionally. Stir in enough of the milk to reach desired consistency. Season to taste with salt and pepper. Sprinkle with Parmesan cheese before serving.",
     "1) Dice the onion and mince the garlic. Add both to a large pot with the olive oil and cook over medium heat until they are soft and transparent. Add the ground beef and continue to sauté until the beef is fully browned. \n" +
             "2) Drain the beans and add them to the pot along with the diced tomatoes, tomato paste, 1 cup water, and all of the ingredients for the chili seasoning. Stir until well combined. Place a lid on the pot and allow it to simmer over a low flame for at least 15 minutes, stirring occasionally (the flavor gets better the longer it simmers).",
@@ -152,9 +172,10 @@ public class TabFragment1 extends android.support.v4.app.ListFragment implements
             "2) Meanwhile, place 1 cup water, 1/4 cup sun-dried tomatoes, plum tomato, garlic, 2 teaspoons marjoram, vinegar and 2 teaspoons oil in a blender. Blend until just a few chunks remain.\n" +
             "3) Season chicken with salt and pepper on both sides. Heat remaining 1 tablespoon oil in a large skillet over medium-high heat. Add the chicken and cook, adjusting the heat as necessary to prevent burning, until golden outside and no longer pink in the middle, 3 to 5 minutes per side. Transfer to a plate; tent with foil to keep warm.\n" +
             "4) Pour the tomato sauce into the pan and bring to a boil. Measure out 1/2 cup sauce to a small bowl. Add the remaining 1/4 cup sun-dried tomatoes to the pan along with the orzo, artichoke hearts and 6 tablespoons cheese. Cook, stirring, until heated through, 1 to 2 minutes. Divide among 4 plates.\n" +
-            "5) Slice the chicken. Top each portion of pasta with sliced chicken, 2 tablespoons of the reserved tomato sauce and a sprinkling of the remaining cheese and marjoram.\n",
-    };
-    public static String[] nutrition = {"Per serving: 412 kcal cal., \n" +
+            "5) Slice the chicken. Top each portion of pasta with sliced chicken, 2 tablespoons of the reserved tomato sauce and a sprinkling of the remaining cheese and marjoram."
+            ));
+    public static ArrayList<String> nutrition = new ArrayList(Arrays.asList(
+            "Per serving: 412 kcal cal., \n" +
             " 12 g fat\n" +
             " (8 g sat. fat, \n" +
             " 1 g polyunsaturated fat, \n" +
@@ -209,7 +230,8 @@ public class TabFragment1 extends android.support.v4.app.ListFragment implements
                     "36 g protein\n"+
                     "10 g fiber\n"+
                     "372 mg sodium\n"+
-                    "546 mg potassium"};
+                    "546 mg potassium"
+    ));
 
     ListAdapter adapter;
     private List<RowItem> rowItems;
@@ -217,8 +239,23 @@ public class TabFragment1 extends android.support.v4.app.ListFragment implements
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+//        setHasOptionsMenu(true);
         View rootView = inflater.inflate(R.layout.tab_fragment_1, container, false);
         return rootView;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_main, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+
+        // Associate searchable configuration with the SearchView
+//        SearchManager searchManager =
+//                (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+//        SearchView searchView =
+//                (SearchView) menu.findItem(R.id.search).getActionView();
+//        searchView.setSearchableInfo(
+//                searchManager.getSearchableInfo(getActivity().getComponentName()));
     }
 
     @Override
@@ -226,9 +263,9 @@ public class TabFragment1 extends android.support.v4.app.ListFragment implements
         super.onActivityCreated(savedInstanceState);
         List<RowItem> rowItems;
         rowItems = new ArrayList<RowItem>();
-        for (int i = 0; i < recipe_names.length; i++) {
-            RowItem item = new RowItem(recipe_names[i],recipe_images[i], recipe_time[i], recipe_stars[i], recipe_summaries[i],
-                    recipe_prep[i], recipe_cook[i], recipe_dollars[i], ingredients[i], instructions[i], nutrition[i]);
+        for (int i = 0; i < recipe_names.size(); i++) {
+            RowItem item = new RowItem(recipe_names.get(i),recipe_images.get(i), recipe_time.get(i), recipe_stars.get(i), recipe_summaries.get(i),
+                    recipe_dollars.get(i), ingredients.get(i), instructions.get(i), nutrition.get(i));
             rowItems.add(item);
         }
 
@@ -237,23 +274,51 @@ public class TabFragment1 extends android.support.v4.app.ListFragment implements
         getListView().setOnItemClickListener(this);
     }
 
+
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
+    }
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         current_index = position;
         // custom dialog
         final Dialog dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.custom_dialog_box);
-        dialog.setTitle(recipe_names[position]);
+        dialog.setTitle(recipe_names.get(position));
 
         // set the custom dialog components - text, image and button
         TextView text = (TextView) dialog.findViewById(R.id.text);
-        text.setText(recipe_names[position]);
+        text.setText(recipe_names.get(position));
+
         ImageView image = (ImageView) dialog.findViewById(R.id.image);
-        image.setImageResource(recipe_images[position]);
+        new DownloadImageTask(image).execute(recipe_images.get(position));
+
         TextView total_time = (TextView) dialog.findViewById(R.id.total_time);
-        total_time.setText("Total time: " + recipe_time[position] + " minutes");
+        total_time.setText("Total time: " + recipe_time.get(position) + " minutes");
         ImageView rating = (ImageView) dialog.findViewById(R.id.rating);
-        int num_stars = recipe_stars[position];
+        int num_stars = recipe_stars.get(position);
         if (num_stars == 1) {
             rating.setImageResource(R.drawable.one_star);
         } else if (num_stars == 2) {
@@ -269,30 +334,24 @@ public class TabFragment1 extends android.support.v4.app.ListFragment implements
         }
 
         ImageView dollars = (ImageView) dialog.findViewById(R.id.dollars);
-        int num_dollars = recipe_dollars[position];
+        int num_dollars = recipe_dollars.get(position);
         if (num_dollars == 1) {
             dollars.setImageResource(R.drawable.one_dollar);
-        } else if (num_dollars == 2) {
-            dollars.setImageResource(R.drawable.two_dollars);
-        } else if (num_dollars == 3) {
-            dollars.setImageResource(R.drawable.three_dollars);
-        } else if (num_dollars == 4) {
-            dollars.setImageResource(R.drawable.four_dollars);
         } else {
-            // unrated?
+            dollars.setImageResource(R.drawable.two_dollars);
         }
 
         TextView summary = (TextView) dialog.findViewById(R.id.ingredients_summary);
-        summary.setText(recipe_summaries[position]);
+        summary.setText(recipe_summaries.get(position));
 
         TextView ingred = (TextView) dialog.findViewById(R.id.ingredients);
-        ingred.setText(ingredients[position]);
+        ingred.setText(ingredients.get(position));
 
         TextView instruct = (TextView) dialog.findViewById(R.id.instructions);
-        instruct.setText(instructions[position]);
+        instruct.setText(instructions.get(position));
 
         TextView nutrit = (TextView) dialog.findViewById(R.id.nutrition);
-        nutrit.setText(nutrition[position]);
+        nutrit.setText(nutrition.get(position));
 
         Button addButton = (Button) dialog.findViewById(R.id.add_button);
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -316,5 +375,7 @@ public class TabFragment1 extends android.support.v4.app.ListFragment implements
 
         dialog.show();
     }
+
+
 
 }
