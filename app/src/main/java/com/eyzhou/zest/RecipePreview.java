@@ -1,13 +1,32 @@
 package com.eyzhou.zest;
 
-/**
- * Created by ddirenzo on 1/16/2016.
- */
+import org.json.JSONObject;
+
 public class RecipePreview {
-    public int id;
-    public String title;
-    public String image;
-    public int usedIngredientCount;
-    public int missedIngredientCount;
-    public int likes;
+    public RecipePreview(JSONObject obj) {
+        this.obj = obj;
+    }
+    private JSONObject obj;
+    private int getInt(String key) {
+        try {
+            return obj.getInt(key);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+    private String getString(String key) {
+        try {
+            return obj.getString(key);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public int getId() { return getInt("id"); }
+    public String getTitle() { return getString("title"); }
+    public String getImageUrl() { return getString("image"); }
+    public int getUsedIngredientCount() { return getInt("usedIngredientCount"); }
+    public int getMissedIngredientCount() { return getInt("missedIngredientCount"); }
+    public int getLikes() { return getInt("likes"); }
 }
