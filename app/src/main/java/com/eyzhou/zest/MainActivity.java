@@ -143,13 +143,17 @@ public class MainActivity extends AppCompatActivity {
             stars.add(5); // fake
             String summary = "";
             String ing = "";
-            for (int j = 0; j < recipe.getExtendedIngredients().length; j++) {
-                String name = recipe.getExtendedIngredients()[j].getName();
-                double amount = recipe.getExtendedIngredients()[j].getAmount();
-                String unit = recipe.getExtendedIngredients()[j].getUnit();
+            RecipeIngredient[] ingredient_list = recipe.getExtendedIngredients();
+            for (int j = 0; j < ingredient_list.length; j++) {
+                String name = ingredient_list[j].getName();
+                double amount = ingredient_list[j].getAmount();
+                String unit = ingredient_list[j].getUnit();
                 summary = summary + name + ", ";
                 ing = ing + Double.toString(amount) + " " + unit + " " + name + ", ";
             }
+            if (recipe.getCheap()) {
+                dollars.add(1);
+            } else { dollars.add(2); }
             summaries.add(summary);
             ingredients.add(ing);
             instructions.add("instructions"); // EMPTY
@@ -166,13 +170,29 @@ public class MainActivity extends AppCompatActivity {
         TabFragment1.instructions = instructions;
         TabFragment1.nutrition = nutrition;
 
+        Log.d("TEST", "names: " + Integer.toString(TabFragment1.recipe_names.size()));
+        Log.d("TEST", "images: " + Integer.toString(TabFragment1.recipe_images.size()));
+        Log.d("TEST", "time: " + Integer.toString(TabFragment1.recipe_time.size()));
+        Log.d("TEST", "stars: " + Integer.toString(TabFragment1.recipe_stars.size()));
+        Log.d("TEST", "summaries: " + Integer.toString(TabFragment1.recipe_summaries.size()));
+        Log.d("TEST", "dollars: " + Integer.toString(TabFragment1.recipe_dollars.size()));
+        Log.d("TEST", "ingredients: " + Integer.toString(TabFragment1.ingredients.size()));
+        Log.d("TEST", "instructions: " + Integer.toString(TabFragment1.instructions.size()));
+        Log.d("TEST", "nutrition: " + Integer.toString(TabFragment1.nutrition.size()));
+
         // update list adapter
         List<RowItem> new_recipes;
         new_recipes = new ArrayList<RowItem>();
         for (int i = 0; i < TabFragment1.recipe_names.size(); i++) {
-            RowItem item = new RowItem(TabFragment1.recipe_names.get(i),TabFragment1.recipe_images.get(i), TabFragment1.recipe_time.get(i),
-                    TabFragment1.recipe_stars.get(i), TabFragment1.recipe_summaries.get(i),
-                    TabFragment1.recipe_dollars.get(i), TabFragment1.ingredients.get(i), TabFragment1.instructions.get(i), TabFragment1.nutrition.get(i));
+            RowItem item = new RowItem(TabFragment1.recipe_names.get(i),
+                    TabFragment1.recipe_images.get(i),
+                    TabFragment1.recipe_time.get(i),
+                    TabFragment1.recipe_stars.get(i),
+                    TabFragment1.recipe_summaries.get(i),
+                    TabFragment1.recipe_dollars.get(i),
+                    TabFragment1.ingredients.get(i),
+                    TabFragment1.instructions.get(i),
+                    TabFragment1.nutrition.get(i));
             new_recipes.add(item);
         }
         ListAdapter new_adapter = new ListAdapter(this, new_recipes);

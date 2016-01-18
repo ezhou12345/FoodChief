@@ -266,11 +266,11 @@ public class TabFragment1 extends android.support.v4.app.ListFragment implements
         List<RowItem> rowItems;
         rowItems = new ArrayList<RowItem>();
 
-        for (int i = 0; i < recipe_names.size(); i++) {
-            RowItem item = new RowItem(recipe_names.get(i),recipe_images.get(i), recipe_time.get(i), recipe_stars.get(i), recipe_summaries.get(i),
-                    recipe_dollars.get(i), ingredients.get(i), instructions.get(i), nutrition.get(i));
-            rowItems.add(item);
-        }
+//        for (int i = 0; i < recipe_names.size(); i++) {
+//            RowItem item = new RowItem(recipe_names.get(i),recipe_images.get(i), recipe_time.get(i), recipe_stars.get(i), recipe_summaries.get(i),
+//                    recipe_dollars.get(i), ingredients.get(i), instructions.get(i), nutrition.get(i));
+//            rowItems.add(item);
+//        }
         listview1 = getListView();
         adapter = new ListAdapter(getActivity(), rowItems);
         setListAdapter(adapter);
