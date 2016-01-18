@@ -9,10 +9,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -78,9 +81,37 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void deleteRecipe (View view) {
+//            Toast.makeText(this, "-", Toast.LENGTH_SHORT).show();
+            View parentRow = (View) view.getParent();
+            ListView listView = (ListView) parentRow.getParent();
+            final int position = listView.getPositionForView(parentRow);
+            TabFragment3.recipe_indices.remove(position);
+
+            List<RowItem> new_menuItems;
+            new_menuItems = new ArrayList<RowItem>();
+            for (int i = 0; i < TabFragment3.recipe_indices.size(); i++) {
+                Integer index = TabFragment3.recipe_indices.get(i);
+                RowItem item = new RowItem(TabFragment1.recipe_names.get(index), TabFragment1.recipe_images.get(index), TabFragment1.recipe_time.get(index),
+                        TabFragment1.recipe_stars.get(index), TabFragment1.recipe_summaries.get(index),  TabFragment1.recipe_dollars.get(index), TabFragment1.ingredients.get(index),
+                        TabFragment1.instructions.get(index), TabFragment1.nutrition.get(index));
+                new_menuItems.add(item);
+            }
+
+
+            ListAdapterSmall new_adapter = new ListAdapterSmall(this, new_menuItems);// adapter with new data
+            listView.setAdapter(new_adapter);
+            new_adapter.notifyDataSetChanged();
+    }
+
+
     public void searchRecipes(View view) {
         EditText editText   = (EditText)findViewById(R.id.search_bar);
         String searched_text = editText.getText().toString();
+        if (searched_text.matches("")) {
+            Toast.makeText(this, "Please enter some ingredients", Toast.LENGTH_SHORT).show();
+            return;
+        }
 //        Toast.makeText(this, searched_text, Toast.LENGTH_SHORT).show();
         String[] search_ingredients = searched_text.split(", ");
         RecipePreview[] suggestions = FoodAPI.searchRecipePreviewsByIngredientList(search_ingredients);
@@ -134,6 +165,20 @@ public class MainActivity extends AppCompatActivity {
         TabFragment1.ingredients = ingredients;
         TabFragment1.instructions = instructions;
         TabFragment1.nutrition = nutrition;
+
+        // update list adapter
+        List<RowItem> new_recipes;
+        new_recipes = new ArrayList<RowItem>();
+        for (int i = 0; i < TabFragment1.recipe_names.size(); i++) {
+            RowItem item = new RowItem(TabFragment1.recipe_names.get(i),TabFragment1.recipe_images.get(i), TabFragment1.recipe_time.get(i),
+                    TabFragment1.recipe_stars.get(i), TabFragment1.recipe_summaries.get(i),
+                    TabFragment1.recipe_dollars.get(i), TabFragment1.ingredients.get(i), TabFragment1.instructions.get(i), TabFragment1.nutrition.get(i));
+            new_recipes.add(item);
+        }
+        ListAdapter new_adapter = new ListAdapter(this, new_recipes);
+        ListView listview1 = TabFragment1.listview1;
+        listview1.setAdapter(new_adapter);
+//        listview1.setOnItemClickListener(this);
 
     }
 }

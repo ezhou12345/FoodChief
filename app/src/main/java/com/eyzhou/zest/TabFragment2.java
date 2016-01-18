@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.io.InputStream;
@@ -23,6 +24,8 @@ import java.util.List;
  */
 public class TabFragment2 extends android.support.v4.app.ListFragment implements AdapterView.OnItemClickListener{
     ListAdapterFav adapter;
+    public static ListView listview2;
+
 //    private List<RowItem> favItems;
     public static ArrayList<Integer> fav_indices = new ArrayList<Integer>();
     int current_ind = 0;
@@ -45,7 +48,7 @@ public class TabFragment2 extends android.support.v4.app.ListFragment implements
                     TabFragment1.instructions.get(index), TabFragment1.nutrition.get(index));
             favItems.add(item);
         }
-
+        listview2 = getListView();
         adapter = new ListAdapterFav(getActivity(), favItems);
         setListAdapter(adapter);
         getListView().setOnItemClickListener(this);

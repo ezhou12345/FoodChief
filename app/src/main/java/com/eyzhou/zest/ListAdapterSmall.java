@@ -130,19 +130,19 @@ public class ListAdapterSmall extends BaseAdapter{
 //        TextView ind = (TextView) convertView.findViewById(R.id.recipe_index_small);
 //        ind.setText(Integer.toString(position));
 
-        Button deleteButton = (Button) convertView.findViewById(R.id.MenuDeleteButton);
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Toast.makeText(context, "-", Toast.LENGTH_SHORT).show();
-                View parentRow = (View) v.getParent();
-                ListView listView = (ListView) parentRow.getParent();
-                final int position = listView.getPositionForView(parentRow);
-                TabFragment3.recipe_indices.remove(position);
-                TabFragment3.adapter.notifyDataSetChanged();
-
-
-            }
-        });
+//        Button deleteButton = (Button) convertView.findViewById(R.id.MenuDeleteButton);
+//        deleteButton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                Toast.makeText(context, "-", Toast.LENGTH_SHORT).show();
+//                View parentRow = (View) v.getParent();
+//                ListView listView = (ListView) parentRow.getParent();
+//                final int position = listView.getPositionForView(parentRow);
+//                TabFragment3.recipe_indices.remove(position);
+//                TabFragment3.adapter.notifyDataSetChanged();
+//
+//
+//            }
+//        });
 
         return convertView;
 

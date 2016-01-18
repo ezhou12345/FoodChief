@@ -28,6 +28,7 @@ public class TabFragment3 extends android.support.v4.app.ListFragment implements
     public static ListAdapterSmall adapter;
     private List<RowItem> menuItems;
     public static ArrayList<Integer> recipe_indices = new ArrayList<Integer>();
+    public static ListView listview3;
 
     public View rootView;
     @Override
@@ -48,10 +49,9 @@ public class TabFragment3 extends android.support.v4.app.ListFragment implements
                     TabFragment1.instructions.get(index), TabFragment1.nutrition.get(index));
             menuItems.add(item);
         }
-
+        listview3 = getListView();
         adapter = new ListAdapterSmall(getActivity(), menuItems);
         setListAdapter(adapter);
-        getListView().setOnItemClickListener(this);
 
 
     }
