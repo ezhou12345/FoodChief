@@ -130,8 +130,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 //        Toast.makeText(this, searched_text, Toast.LENGTH_SHORT).show();
-        String[] search_ingredients = searched_text.split(", ");
-        RecipePreview[] suggestions = FoodAPI.searchRecipePreviewsByIngredientList(search_ingredients);
+        RecipePreview[] suggestions = FoodAPI.searchRecipePreviewsByIngredientList(searched_text);
 
 //        String title, int icon, int time, int stars, String summary, int dollar_signs,
 //        String ingredients, String instructions, String nutrition
@@ -173,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
             } else { dollars.add(2); }
             summaries.add(summary);
             ingredients.add(ing);
-            instructions.add("instructions"); // EMPTY
+            instructions.add(FoodAPI.getRecipeInstructionsByUrl(recipe.getSourceUrl()).plaintext); // EMPTY
             nutrition.add("nutrition"); // EMPTY
         }
 

@@ -31,7 +31,7 @@ class recipePreviewSearch extends AsyncTask<String, Void, RecipePreview[]> {
         try {
             StringBuilder builder = new StringBuilder(Util.BASE_URL);
             builder.append("/recipes/findByIngredients?")
-                    .append("ingredients=").append(Util.join(ingredients, "%2C"))
+                    .append("ingredients=").append(URLEncoder.encode(ingredients[0], "UTF-8"))
                     .append("&limitLicense=false")
                     .append("&number=1")
                     .append("&ranking=1");
@@ -97,7 +97,7 @@ class extractInstructions extends AsyncTask<String, Void, RecipeInstructions> {
 }
 
 public class FoodAPI {
-    public static RecipePreview[] searchRecipePreviewsByIngredientList(String[] ingredients) {
+    public static RecipePreview[] searchRecipePreviewsByIngredientList(String ingredients) {
         try {
             AsyncTask<String, Void, RecipePreview[]> r = new recipePreviewSearch().execute(ingredients);
             return r.get();
