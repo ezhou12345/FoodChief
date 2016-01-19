@@ -121,11 +121,28 @@ public class TabFragment4 extends android.support.v4.app.Fragment implements Ada
         ListView lv_menu = (ListView ) dialog.findViewById(R.id.menu_list);
         ListAdapterFav menu_adapter = new ListAdapterFav(getActivity(), menuItems);
         lv_menu.setAdapter(menu_adapter);
+
         lv_menu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(), Integer.toString(position), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), Integer.toString(position), Toast.LENGTH_SHORT).show();
                 mon_indices.add(TabFragment3.recipe_indices.get(position));
+
+                List<RowItem> new_mondayItems = new ArrayList<RowItem>();
+                for (int i = 0; i < mon_indices.size(); i++) {
+                    Integer index = mon_indices.get(i);
+                    RowItem item = new RowItem(TabFragment1.recipe_names.get(index), TabFragment1.recipe_images.get(index), TabFragment1.recipe_time.get(index),
+                            TabFragment1.recipe_stars.get(index), TabFragment1.recipe_summaries.get(index),  TabFragment1.recipe_dollars.get(index), TabFragment1.ingredients.get(index),
+                            TabFragment1.instructions.get(index), TabFragment1.nutrition.get(index));
+                    new_mondayItems.add(item);
+                }
+
+                lv_mon = (ListView)rootView.findViewById(R.id.monday_list);
+                ListAdapterFav new_adapter = new ListAdapterFav(getActivity(), new_mondayItems);
+                lv_mon.setAdapter(new_adapter);
+                new_adapter.notifyDataSetChanged();
+//                lv_mon.setOnItemClickListener(this);
+
                 dialog.dismiss();
             }
         });

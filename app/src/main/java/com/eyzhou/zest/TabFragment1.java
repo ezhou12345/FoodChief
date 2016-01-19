@@ -266,11 +266,11 @@ public class TabFragment1 extends android.support.v4.app.ListFragment implements
         List<RowItem> rowItems;
         rowItems = new ArrayList<RowItem>();
 
-//        for (int i = 0; i < recipe_names.size(); i++) {
-//            RowItem item = new RowItem(recipe_names.get(i),recipe_images.get(i), recipe_time.get(i), recipe_stars.get(i), recipe_summaries.get(i),
-//                    recipe_dollars.get(i), ingredients.get(i), instructions.get(i), nutrition.get(i));
-//            rowItems.add(item);
-//        }
+        for (int i = 0; i < recipe_names.size(); i++) {
+            RowItem item = new RowItem(recipe_names.get(i),recipe_images.get(i), recipe_time.get(i), recipe_stars.get(i), recipe_summaries.get(i),
+                    recipe_dollars.get(i), ingredients.get(i), instructions.get(i), nutrition.get(i));
+            rowItems.add(item);
+        }
         listview1 = getListView();
         adapter = new ListAdapter(getActivity(), rowItems);
         setListAdapter(adapter);
@@ -380,17 +380,19 @@ public class TabFragment1 extends android.support.v4.app.ListFragment implements
                 TabFragment3.recipe_indices.add(current_index);
                 Toast.makeText(getActivity(), "Recipe added to menu!", Toast.LENGTH_SHORT).show();
 
-//                List<RowItem> new_rowItems;
-//                new_rowItems = new ArrayList<RowItem>();
-//                for (int i = 0; i < recipe_names.size(); i++) {
-//                    RowItem item = new RowItem(recipe_names.get(i),recipe_images.get(i), recipe_time.get(i), recipe_stars.get(i), recipe_summaries.get(i),
-//                            recipe_dollars.get(i), ingredients.get(i), instructions.get(i), nutrition.get(i));
-//                    new_rowItems.add(item);
-//                }
-//                ListView listview3 = TabFragment3.listview3;
-//                ListAdapterSmall new_adapter = new ListAdapterSmall(getActivity(), new_rowItems);
-//                listview3.setAdapter(new_adapter);
-//                new_adapter.notifyDataSetChanged();
+                List<RowItem> new_rowItems;
+                new_rowItems = new ArrayList<RowItem>();
+                for (int i = 0; i < TabFragment3.recipe_indices.size(); i++) {
+                    Integer index = TabFragment3.recipe_indices.get(i);
+                    RowItem item = new RowItem(recipe_names.get(index),recipe_images.get(index), recipe_time.get(index),
+                            recipe_stars.get(index), recipe_summaries.get(index),
+                            recipe_dollars.get(index), ingredients.get(index), instructions.get(index), nutrition.get(index));
+                    new_rowItems.add(item);
+                }
+                ListView listview3 = TabFragment3.listview3;
+                ListAdapterSmall new_menu_adapter = new ListAdapterSmall(getActivity(), new_rowItems);
+                listview3.setAdapter(new_menu_adapter);
+                new_menu_adapter.notifyDataSetChanged();
 
             }
         });

@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="#D3EDE9"
     >
     <Button
         android:id="@+id/MenuDeleteButton"
@@ -11,7 +12,7 @@
         android:text="-"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:onClick="deleteRecipe"/>
     <ImageView
         android:id="@+id/Itemimage_small"

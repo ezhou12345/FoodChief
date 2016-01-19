@@ -18,6 +18,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    final int[] tab_icons = new int[]{
+            R.drawable.recipe_icon,
+            R.drawable.fav_icon,
+            R.drawable.plan_icon,
+            R.drawable.menu_icon,
+            R.drawable.grocery_icon};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,17 +34,28 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Recipes"));
-        tabLayout.addTab(tabLayout.newTab().setText("Favorites"));
-        tabLayout.addTab(tabLayout.newTab().setText("Menu"));
-        tabLayout.addTab(tabLayout.newTab().setText("Plan"));
-        tabLayout.addTab(tabLayout.newTab().setText("Grocery"));
+//        tabLayout.addTab(tabLayout.newTab().setText("Recipes"));
+//        tabLayout.addTab(tabLayout.newTab().setText("Favorites"));
+//        tabLayout.addTab(tabLayout.newTab().setText("Plan"));
+//        tabLayout.addTab(tabLayout.newTab().setText("Menu"));
+//        tabLayout.addTab(tabLayout.newTab().setText("Grocery"));
+        tabLayout.addTab(tabLayout.newTab());
+        tabLayout.addTab(tabLayout.newTab());
+        tabLayout.addTab(tabLayout.newTab());
+        tabLayout.addTab(tabLayout.newTab());
+        tabLayout.addTab(tabLayout.newTab());
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        tabLayout.getTabAt(0).setIcon(tab_icons[0]);
+        tabLayout.getTabAt(1).setIcon(tab_icons[1]);
+        tabLayout.getTabAt(2).setIcon(tab_icons[2]);
+        tabLayout.getTabAt(3).setIcon(tab_icons[3]);
+        tabLayout.getTabAt(4).setIcon(tab_icons[4]);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         final PagerAdapter adapter = new PagerAdapter
                 (getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(4);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
